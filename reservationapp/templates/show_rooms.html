@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block info %}
+<p>Lista sal</p>
+{% endblock %}
+
+{% block main %}
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td>Nazwa sali</td>
+                <td>Liczba miejsc</td>
+                <td>Projektor</td>
+                <td>Dzisiaj zajęta</td>
+                <td>Edytuj</td>
+                <td>Usuń</td>
+            </tr>
+            {% for room in rooms %}
+                <tr>
+                    <td><a href="{% url 'room' room.id %}">{{ room.name }}</a></td>
+                    <td>{{ room.capacity }}</td>
+                    <td
+                        {% if room.projector == True %}
+                            class="text-success">Tak
+                        {% else %}
+                            class="text-danger">Nie
+                        {% endif %}
+                    </td>
+                    <td
+                        {% if room.id in today_busy %}
+                            class="text-danger">Tak
+                        {% else %}
+                            class="text-success">Nie
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'modify_room' room.id %}">edytuj</a></td>
+                    <td><a href="{% url 'delete_room' room.id %}">usuń</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

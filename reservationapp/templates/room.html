@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block info %}
+<p>Szczegóły sali</p>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-primary">Nazwa: {{ room.name }}</li>
+        <li class="list-group-item list-group-item-primary">Pojemność: {{ room.capacity }}</li>
+        <li class="list-group-item list-group-item-primary">Projektor:
+            {% if room.projector == True %}
+                Tak
+            {% else %}
+                Nie
+            {% endif %}
+        </li>
+        <li class="list-group-item list-group-item-gray">Zajęta:</li>
+        {% for date in busy_dates %}
+            <li class="list-group-item list-group-item-danger">{{ date }}</li>
+        {% endfor %}
+    </ul>
+    <div class="jumbotron">
+        <form action="{% url 'reservate' room.id %}" method="post">
+            {% csrf_token %}
+            <label for="id_date" class="col-form-label  requiredField">
+                Data<span class="asteriskField">*</span>
+            </label>
+            <div class="">
+                <input name="date" id="datepicker" width="276" />
+                <script>
+                    var date = new Date();
+                    date.setDate(date.getDate());
+                    $('#datepicker').datepicker({
+                        uiLibrary: 'bootstrap4',
+                        format: 'yyyy-mm-dd',
+                    });
+                </script>
+            </div>
+            {{ form.comment|as_crispy_field }}
+            <button type="submit" class="btn btn-info">Rezerwuj</button>
+        </form>
+    </div>
+
+{% endblock %}

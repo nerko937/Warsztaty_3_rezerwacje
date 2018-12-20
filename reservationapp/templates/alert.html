@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block info %}
+<p>Błąd</p>
+{% endblock %}
+
+{% block main %}
+    <div class="jumbotron text-center">
+        <p>{{ msg }}</p>
+    </div>
+    <script>
+    setTimeout(function () {
+    window.location.replace(
+        {% if room_id %}
+        "{% url 'room' room_id %}"
+        {% else %}
+        "{% url 'search' %}"
+        {% endif %}
+    );
+    }, 5000);
+    </script>
+
+{% endblock %}

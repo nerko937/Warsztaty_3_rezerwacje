@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block info %}
+<p>Szukaj sal</p>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block main %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_date" class="col-form-label">
+            Data<span class="asteriskField"></span>
+        </label>
+        <div class="">
+            <input name="date" id="datepicker" width="276" />
+            <script>
+                var date = new Date();
+                date.setDate(date.getDate());
+                $('#datepicker').datepicker({
+                    uiLibrary: 'bootstrap4',
+                    format: 'yyyy-mm-dd',
+                });
+            </script>
+        </div>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-info">Szukaj</button>
+    </form>
+{% endblock %}
