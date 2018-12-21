@@ -14,7 +14,7 @@ class ReservationForm(forms.ModelForm):
 
     class Meta:
         model = Reservation
-        fields = ('date', 'room', 'comment')
+        fields = ('comment',)
 
 
 class SearchForm(forms.Form):
