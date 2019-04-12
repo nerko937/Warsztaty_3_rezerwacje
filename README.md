@@ -1,5 +1,11 @@
 # Warsztaty_3_rezerwacje
 
+Simpe Django project for room reservation.
+- Used tools and technologies: Python, Django, Bootstrap 4
+
+![](readme_img/preview.png)
+
+To run project:
 1. cd to the directory of repository.
 2. activate your virtualenv.
 3. run: `pip install -r requirements.txt in your shell`.
